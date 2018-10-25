@@ -72,12 +72,11 @@
                 <div class="card-body centerText">
 					<h3 class="card-text"><?=$article["name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
-                    <form action="views/checkout.php">
+                    <form action="views/checkout.php" method="POST">
                         <input type="number" class="centerText" name="<?=$article["name"]?>Amount" value="0" size="2"/>
                         <input type="hidden" name="<?=$article["name"]?>Price" value="<?=$newPrice?>"/>
                         <input class="mt-1" type="submit" value="Add to cart">
                     </form>
-                    
                 </div>
             </div>
         <?php 
