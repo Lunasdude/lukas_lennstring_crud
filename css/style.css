@@ -1,0 +1,26 @@
+form{
+    text-align: center;
+    width: 25%;
+    margin: 0 auto;
+}
+form .field{
+    float: right;
+}
+.box{
+    margin: 20px auto;
+}
+.card-img-top{
+    margin: 10px auto;    
+}
+.bigP{
+    font-size: 1.2em;
+    text-align: center;
+    text-decoration: underline;
+}
+.centerText{
+    text-align: center;
+}
+.discountText{
+    color: gray;
+    padding-bottom: 8px;
+}
