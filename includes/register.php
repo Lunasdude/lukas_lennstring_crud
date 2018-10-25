@@ -6,16 +6,12 @@
  * 2. Koppling till databas: PDO
  * 3. Spara användaren i databasen
  */
-$pdo = new PDO(
-    "mysql:host=localhost;dbname=niceshop;charset=utf8",
-    "root",
-    "root"
-);
+include("database_connection.php");
 $username = $_POST["username"];
 $password = $_POST["password"];
 //Password hashed with PASSWORD_DEFAULT uses the best avalible method
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-$statement = $pdo->prepare("INSERT INTO customers(username, password) VALUES (:username, :password)");
+$statement = $pdo->prepare("INSERT INTO customer(username, password) VALUES (:username, :password)");
 //Execute populates the statement and runs it
 $statement->execute(
     [
