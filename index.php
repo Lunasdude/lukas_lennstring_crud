@@ -77,12 +77,13 @@
             <div class="card col-6 col-md-4 col-xl-3">
                 <img class="card-img-top" src="<?=$article['image']?>" alt="<?=$article['name']?>">
                 <div class="card-body centerText">
-					<p class="card-text"><?=$article["name"]?></p>
+					<h3 class="card-text"><?=$article["name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
                     <!-- Sends the amount and the new price to the checkout form -->
                     <input form="checkoutForm" type="text" class="centerText" name="<?=$article["name"]?>Amount" placeholder="Antal"/>
                     <input form="checkoutForm" type="hidden" name="<?=$article["name"]?>Price" placeholder="Antal"
 					value="<?=$newPrice?>"/>
+                    <input class="mt-1" form="checkoutForm" type="submit" value="Add to cart">
                 </div>
             </div>
         <?php 
