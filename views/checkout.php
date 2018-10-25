@@ -95,7 +95,6 @@
 
                 <!-- Buttons -->
 				<div class="centerText col-12">
-					<a href="logout.php" class="btn btn-danger">Log out</a>
 					<a href="index.php" class="btn btn-dark">Return</a>
 				</div>
             </div>
