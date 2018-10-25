@@ -1,40 +1,24 @@
 <?php
+    session_start();
+?>
 
-    include("includes/head.php");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nice shop™</title>
 
+    <!-- CSS links for Font Awesome, Bootstrap and my own stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+<?php
     //Data about the articles
-    $stock = [ 
-        [
-            "name" => "Kotte",
-            "price" => 80,
-            "image" => "images/pinecone.png"
-        ],
-        [
-            "name" => "Stubbe",
-            "price" => 890,
-            "image" => "images/stump.png"
-        ],
-        [
-            "name" => "Däck",
-            "price" => 500,
-            "image" => "images/tire.png"
-        ],
-        [
-            "name" => "Sten",
-            "price" => 200,
-            "image" => "images/rock.jpg"
-        ],
-        [
-            "name" => "Durkplåt",
-            "price" => 300,
-            "image" => "images/metal.jpg"
-        ],
-        [
-            "name" => "Bromsskiva",
-            "price" => 379,
-            "image" => "images/scrap.jpg"
-        ]
-    ];
+    include("includes/stock.php");
 ?>
 
 <header>
@@ -44,8 +28,10 @@
 </header>
 
 <div class="container">
+    
     <a href="views/login.php" style="width:100px;display:block" class="btn btn-dark mt-1 mx-auto">Log in</a>
-	<?php
+	
+    <?php
     // Writes if a discount applies on the current weekday
 	if(date(D) === "Mon"){
 		echo "<p class='bigP'>Måndagsrabatt! (-50%)</p>";
@@ -79,11 +65,13 @@
                 <div class="card-body centerText">
 					<h3 class="card-text"><?=$article["name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
-                    <!-- Sends the amount and the new price to the checkout form -->
-                    <input form="checkoutForm" type="text" class="centerText" name="<?=$article["name"]?>Amount" placeholder="Antal"/>
-                    <input form="checkoutForm" type="hidden" name="<?=$article["name"]?>Price" placeholder="Antal"
-					value="<?=$newPrice?>"/>
-                    <input class="mt-1" form="checkoutForm" type="submit" value="Add to cart">
+                    <form action="views/checkout.php">
+                        <input type="text" class="centerText" name="<?=$article["name"]?>Amount" placeholder="Antal"/>
+                        <input type="hidden" name="<?=$article["name"]?>Price" placeholder="Antal"
+                        value="<?=$newPrice?>"/>
+                        <input class="mt-1" type="submit" value="Add to cart">
+                    </form>
+                    
                 </div>
             </div>
         <?php 
