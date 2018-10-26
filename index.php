@@ -1,6 +1,14 @@
 <?php
     session_start();
+
+/**
+ * JOIN products
+ * ON products.product_id
+ * = cart.product_id
+ */
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +40,13 @@
         if(isset($_SESSION["username"])){ ?>
             <h2 style="text-align:center">Hej <?=$_SESSION["username"]?>!</h2>
             <a href="includes/logout.php" style="width:100px;display:block" class="btn btn-danger mt-1 mx-auto">Log out</a>
+
+
         <?php }
         else{ ?>
             <a href="views/login.php" style="width:100px;display:block" class="btn btn-dark mt-1 mx-auto">Log in</a>
+
+            
         <?php }
     ?>
 	
@@ -73,7 +85,7 @@
 					<h3 class="card-text"><?=$article["name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
                     <form action="views/checkout.php" method="POST">
-                        <input type="number" class="centerText" name="<?=$article["name"]?>Amount" value="0" size="2"/>
+                        <input type="number" class="centerText" name="<?=$article["name"]?>Amount" value="0"/>
                         <input type="hidden" name="<?=$article["name"]?>Price" value="<?=$newPrice?>"/>
                         <input class="mt-1" type="submit" value="Add to cart">
                     </form>

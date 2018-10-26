@@ -5,7 +5,7 @@ include("../includes/database_connection.php");
 
 <header>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">Nice shop™</a>
+        <a class="navbar-brand" href="../index.php">Nice shop™</a>
     </nav>
 </header>
 
