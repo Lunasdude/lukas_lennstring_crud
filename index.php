@@ -44,9 +44,29 @@
 
         <?php }
         else{ ?>
-            <a href="views/login.php" style="width:100px;display:block" class="btn btn-dark mt-1 mx-auto">Log in</a>
-
-            
+        <div class="row">
+            <div class="col-6">
+                <h2 style="text-align:center">Log in:</h2>
+                <form action="includes/login.php" method="POST">
+                    <label for="login_username">Username</label>
+                    <input type="text" name="username" id="login_username"> <br>
+                    <label for="login_password">Password</label>
+                    <input type="password" name="password" id="login_password"> <br>
+                    <input type="submit" class="btn btn-dark" value="Log in">
+                </form>
+            </div>
+            <hr>
+            <div class="col-6">
+                <h2 style="text-align:center">New? Register:</h2>
+                <form action="includes/register.php" method="POST">
+                    <label for="register_username">Username</label>
+                    <input type="text" name="username" id="register_username"> <br>
+                    <label for="register_password">Password</label>
+                    <input type="password" name="password" id="register_password"> <br>
+                    <input type="submit" class="btn btn-dark" value="Register">
+                </form>
+            </div>            
+        </div>
         <?php }
     ?>
 	
