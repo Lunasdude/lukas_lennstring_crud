@@ -32,16 +32,30 @@
 <header>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="index.php">Nice shop™</a>
+
+        <?php 
+        if(isset($_SESSION["username"])){ ?>
+        <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-shopping-cart"></i></button>
+            
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <span class="dropdown-item-text">
+                    Thingy Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore dolor iure saepe officiis delectus id quas maxime vitae veritatis optio, cum, voluptatum odio suscipit. Qui, nisi unde. Ratione, blanditiis accusantium?
+                </span>
+                <a href="views/checkout.php" class="btn btn-info mx-auto checkoutBtn">Checkout</a>
+            </div>    
+        </div>
+        
+        <?php }
+    ?>
     </nav>
 </header>
 
 <div class="container">
     <?php 
         if(isset($_SESSION["username"])){ ?>
-            <h2 style="text-align:center">Hej <?=$_SESSION["username"]?>!</h2>
-            <a href="includes/logout.php" style="width:100px;display:block" class="btn btn-danger mt-1 mx-auto">Log out</a>
-
-
+            <h2 style="text-align:center;float:left">Hej <?=$_SESSION["username"]?>!</h2>
+            <a href="includes/logout.php" style="width:100px;display:block;float:right;" class="btn btn-danger mt-1 mx-auto">Log out</a>
         <?php }
         else{ ?>
         <div class="row">
@@ -65,11 +79,11 @@
                     <input type="password" name="password" id="register_password"> <br>
                     <input type="submit" class="btn btn-dark" value="Register">
                 </form>
-            </div>            
+            </div>
         </div>
-        <?php }
+    <?php }
     ?>
-	
+
     <?php
     // Writes if a discount applies on the current weekday
 	if(date(D) === "Mon"){
@@ -104,7 +118,7 @@
                 <div class="card-body centerText">
 					<h3 class="card-text"><?=$article["name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
-                    <form action="views/checkout.php" method="POST">
+                    <form action="includes/add-to-cart.php" method="POST">
                         <input type="number" class="centerText" name="<?=$article["name"]?>Amount" value="0"/>
                         <input type="hidden" name="<?=$article["name"]?>Price" value="<?=$newPrice?>"/>
                         <input class="mt-1" type="submit" value="Add to cart">
@@ -116,5 +130,9 @@
     </div>
 </div>
 
+<!-- Bootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

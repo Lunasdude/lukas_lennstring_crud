@@ -23,3 +23,10 @@ form .field{
     color: gray;
     padding-bottom: 8px;
 }
+.dropdown-menu{
+    min-width: 20rem;
+    padding: .5rem 0 0 0;
+}
+.checkoutBtn{
+    display: block;
+}
