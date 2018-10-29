@@ -66,6 +66,7 @@
                     <input type="text" name="username" id="login_username"> <br>
                     <label for="login_password">Password</label>
                     <input type="password" name="password" id="login_password"> <br>
+                    <h4 style="color:red;"><?=substr_replace($_GET["error"], ' ', 5, 1)?></h4>
                     <input type="submit" class="btn btn-dark" value="Log in">
                 </form>
             </div>
@@ -82,9 +83,7 @@
             </div>
         </div>
     <?php }
-    ?>
 
-    <?php
     // Writes if a discount applies on the current weekday
 	if(date(D) === "Mon"){
 		echo "<p class='bigP'>Måndagsrabatt! (-50%)</p>";
@@ -98,6 +97,7 @@
 	?>
     <div class="row box">
         <?php
+        
         foreach($stock as $article){ 
             //Applies discounts
             if(date(D) === "Mon"){

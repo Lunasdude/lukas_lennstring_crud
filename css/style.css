@@ -29,4 +29,5 @@ form .field{
 }
 .checkoutBtn{
     display: block;
+    border-radius: 0;
 }
