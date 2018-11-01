@@ -53,13 +53,13 @@
 </header>
 
 <div class="container">
+    <div class="row">
     <?php 
         if(isset($_SESSION["username"])){ ?>
-            <h2 style="text-align:center;float:left">Hej <?=$_SESSION["username"]?>!</h2>
-            <a href="includes/logout.php" style="width:100px;display:block;float:right;" class="btn btn-danger mt-1 mx-auto">Log out</a>
+            <h2 style="text-align:center;float:left" class="col-6">Hej <?=$_SESSION["username"]?>!</h2>
+            <a href="includes/logout.php" style="width:100px;display:block;" class="btn btn-danger mt-1 mx-auto">Log out</a>
         <?php }
         else{ ?>
-        <div class="row">
             <div class="col-6">
                 <h2 style="text-align:center">Log in:</h2>
                 <form action="includes/login.php" method="POST">
@@ -83,22 +83,20 @@
                     <input type="submit" class="btn btn-dark" value="Register">
                 </form>
             </div>
-        </div>
-    <?php }
-
-    // Writes if a discount applies on the current weekday
-	if(date(D) === "Mon"){
-		echo "<p class='bigP'>Måndagsrabatt! (-50%)</p>";
-	}
-	elseif(date(D) === "Wed"){
-		echo "<p class='bigP'>Onsdagspriser (+10%)</p>";
-	}
-	elseif(date(D) === "Fri"){
-		echo "<p class='bigP'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
-	}
-	?>
+    <?php } ?>
+    </div>
     <div class="row box">
         <?php
+        // Writes if a discount applies on the current weekday
+        if(true){
+            echo "<p class='bigP col-12'>Måndagsrabatt! (-50%)</p>";
+        }
+        elseif(date(D) === "Wed"){
+            echo "<p class='bigP col-12'>Onsdagspriser (+10%)</p>";
+        }
+        elseif(date(D) === "Fri"){
+            echo "<p class='bigP col-12'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
+        }
 
         $statement = $pdo->prepare("SELECT * FROM products");
         //Execute populates the statement and runs it

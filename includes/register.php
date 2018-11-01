@@ -19,4 +19,5 @@ if(empty($_POST["username"])){
             ":password" => $hashed_password
         ]
     );
+    header('Location: ../index.php');
 }
