@@ -27,6 +27,7 @@
 <?php
     //Data about the articles
     include("includes/stock.php");
+    include("includes/database_connection.php");
 ?>
 
 <header>
@@ -78,6 +79,7 @@
                     <input type="text" name="username" id="register_username"> <br>
                     <label for="register_password">Password</label>
                     <input type="password" name="password" id="register_password"> <br>
+                    <h4 style="color:red;"><?=substr_replace($_GET["registration_error"], ' ', 4, 1)?></h4>
                     <input type="submit" class="btn btn-dark" value="Register">
                 </form>
             </div>
@@ -97,30 +99,36 @@
 	?>
     <div class="row box">
         <?php
-        
-        foreach($stock as $article){ 
+
+        $statement = $pdo->prepare("SELECT * FROM products");
+        //Execute populates the statement and runs it
+        $statement->execute();
+        //When select is used, fetch must happen
+        $fetched_stock = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($fetched_stock as $product){ 
             //Applies discounts
             if(date(D) === "Mon"){
-                $newPrice = $article["price"] * 0.5;
+                $newPrice = $product["price"] * 0.5;
             }
             elseif(date(D) === "Wed"){
-                $newPrice = $article["price"] * 1.1;
+                $newPrice = $product["price"] * 1.1;
             }
-            elseif(date(D) === "Fri" && $article["price"] > 200){
-                $newPrice = $article["price"] - 20;
+            elseif(date(D) === "Fri" && $product["price"] > 200){
+                $newPrice = $product["price"] - 20;
             }
             else{
-                $newPrice = $article["price"];
+                $newPrice = $product["price"];
             }
             ?>
             <div class="card col-6 col-md-4 col-xl-3">
-                <img class="card-img-top" src="<?=$article['image']?>" alt="<?=$article['name']?>">
+                <img class="card-img-top" src="images/<?=$product['image']?>" alt="<?=$product['name']?>">
                 <div class="card-body centerText">
-					<h3 class="card-text"><?=$article["name"]?></h3>
+					<h3 class="card-text"><?=$product["product_name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
                     <form action="includes/add-to-cart.php" method="POST">
-                        <input type="number" class="centerText" name="<?=$article["name"]?>Amount" value="0"/>
-                        <input type="hidden" name="<?=$article["name"]?>Price" value="<?=$newPrice?>"/>
+                        <input type="number" class="centerText" name="<?=$product["product_name"]?>Amount" value="0"/>
+                        <input type="hidden" name="<?=$product["product_name"]?>Price" value="<?=$newPrice?>"/>
                         <input class="mt-1" type="submit" value="Add to cart">
                     </form>
                 </div>
