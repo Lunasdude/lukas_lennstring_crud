@@ -120,14 +120,14 @@
             }
             ?>
             <div class="card col-6 col-md-4 col-xl-3">
-                <img class="card-img-top" src="images/<?=$product['image']?>" alt="<?=$product['name']?>">
+                <img class="card-img-top" src="images/<?=$product['image']?>" alt="<?=$product['product_name']?>">
                 <div class="card-body centerText">
 					<h3 class="card-text"><?=$product["product_name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
                     <form action="includes/add-to-cart.php" method="POST">
-                        <input type="number" class="centerText" name="<?=$product["product_name"]?>Amount" value="0"/>
-                        <input type="hidden" name="<?=$product["product_name"]?>Price" value="<?=$newPrice?>"/>
-                        <input class="mt-1" type="submit" value="Add to cart">
+                        <input type="number" class="centerText" name="product_amount" />
+                        <input type="hidden" name="product_id" value="<?=$product["product_id"]?>"/>
+                        <input class="btn mt-1" type="submit" name="submit" value="Add to cart">
                     </form>
                 </div>
             </div>
