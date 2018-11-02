@@ -21,7 +21,7 @@ if(!isset($_SESSION["id"])){
             [
                 ':product_id' => $_SESSION["product_id"],
                 ':customer_id' => $_SESSION["id"],
-                ':amount' => $_SESSION["product_amount"]
+                ':amount' => $_SESSION["product_amount"],
             ]
         );
         header('Location: ../index.php');

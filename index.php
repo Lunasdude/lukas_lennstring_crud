@@ -88,7 +88,7 @@
     <div class="row box">
         <?php
         // Writes if a discount applies on the current weekday
-        if(true){
+        if(date(D) === "Mon"){
             echo "<p class='bigP col-12'>Måndagsrabatt! (-50%)</p>";
         }
         elseif(date(D) === "Wed"){
@@ -132,7 +132,7 @@
                 </div>
             </div>
         <?php 
-        } ?>
+        } var_dump($newPrice);?>
     </div>
 </div>
 

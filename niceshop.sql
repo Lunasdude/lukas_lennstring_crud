@@ -71,12 +71,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `price`, `image`) VALUES
-(1, 'Kotte', 80, ''),
-(2, 'Stubbe', 890, ''),
-(3, 'Däck', 500, ''),
-(4, 'Sten', 200, ''),
-(5, 'Durkplåt', 300, ''),
-(6, 'Bromsskiva', 379, '');
+(1, 'Kotte', 80, 'pinecone.png'),
+(2, 'Stubbe', 890, 'stump.png'),
+(3, 'Däck', 500, 'tire.png'),
+(4, 'Sten', 200, 'rock.jpg'),
+(5, 'Durkplåt', 300, 'metal.jpg'),
+(6, 'Bromsskiva', 379, 'scrap.jpg');
 
 --
 -- Indexes for dumped tables
