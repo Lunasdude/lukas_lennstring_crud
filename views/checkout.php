@@ -46,11 +46,11 @@ include("../includes/database_connection.php");
                 echo "<p class='discountText'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
             }
                 
-            $statement = $pdo->prepare("SELECT products.product_name FROM products INNER JOIN cart ON products.product_id=cart.product_id");
+            $statement = $pdo->prepare("SELECT products.product_name, cart.amount, cart.new_price FROM products INNER JOIN cart ON products.product_id=cart.product_id");
             $statement->execute();
-            $names = $statement->fetchAll();
-            foreach($names as $name){
-                echo $name["product_name"]."<br>";
+            $articles = $statement->fetchAll();
+            foreach($articles as $article){
+                echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br><br>";
             }
             
             echo "<p>Totalt: ".$totalPrice." kr</p>";

@@ -11,16 +11,18 @@ if(!isset($_SESSION["id"])){
 }else{
     $_SESSION["product_id"] = $_POST["product_id"];
     $_SESSION["product_amount"] = $_POST["product_amount"];
-    var_dump($_SESSION);
+    $_SESSION["product_newprice"] = $_POST["product_newprice"];
+
     if(empty($_SESSION["product_amount"]) || $_SESSION["product_amount"] == 0){
         // header('Location: ../index.php');
     }else{
-        $statement = $pdo->prepare("INSERT INTO cart (product_id, customer_id, amount) VALUES (:product_id, :customer_id, :amount)");
+        $statement = $pdo->prepare("INSERT INTO cart (product_id, customer_id, amount, new_price) VALUES (:product_id, :customer_id, :amount, :new_price)");
         $statement->execute(
             [
                 ':product_id' => $_SESSION["product_id"],
                 ':customer_id' => $_SESSION["id"],
-                ':amount' => $_SESSION["product_amount"]
+                ':amount' => $_SESSION["product_amount"],
+                ':new_price' => $_SESSION["product_newprice"]
             ]
         );
         header('Location: ../index.php');

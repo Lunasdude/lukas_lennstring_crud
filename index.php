@@ -42,7 +42,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <span class="dropdown-item-text">
                     <?php 
-                    
+
                     ?>
                 </span>
                 <a href="views/checkout.php" class="btn btn-info mx-auto checkoutBtn">Checkout</a>
@@ -129,6 +129,7 @@
                     <form action="includes/add-to-cart.php" method="POST">
                         <input type="number" class="centerText" name="product_amount"/>
                         <input type="hidden" name="product_id" value="<?=$product["product_id"]?>"/>
+                        <input type="hidden" name="product_newprice" value="<?=$newPrice?>"/>
                         <input class="btn mt-1" type="submit" name="submit" value="Add to cart">
                     </form>
                 </div>
