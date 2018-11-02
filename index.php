@@ -125,7 +125,7 @@
 					<h3 class="card-text"><?=$product["product_name"]?></h3>
 					<p class="card-text"><?=$newPrice?> kr/st</p>
                     <form action="includes/add-to-cart.php" method="POST">
-                        <input type="number" class="centerText" name="product_amount" />
+                        <input type="number" class="centerText" name="product_amount"/>
                         <input type="hidden" name="product_id" value="<?=$product["product_id"]?>"/>
                         <input class="btn mt-1" type="submit" name="submit" value="Add to cart">
                     </form>
