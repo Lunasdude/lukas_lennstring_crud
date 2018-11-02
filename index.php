@@ -41,7 +41,9 @@
             
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <span class="dropdown-item-text">
-                    Thingy Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore dolor iure saepe officiis delectus id quas maxime vitae veritatis optio, cum, voluptatum odio suscipit. Qui, nisi unde. Ratione, blanditiis accusantium?
+                    <?php 
+                    
+                    ?>
                 </span>
                 <a href="views/checkout.php" class="btn btn-info mx-auto checkoutBtn">Checkout</a>
             </div>    
@@ -132,7 +134,7 @@
                 </div>
             </div>
         <?php 
-        } var_dump($newPrice);?>
+        } ?>
     </div>
 </div>
 

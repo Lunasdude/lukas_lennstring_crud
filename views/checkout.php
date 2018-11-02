@@ -45,7 +45,14 @@ include("../includes/database_connection.php");
             elseif(date(D) === "Fri"){
                 echo "<p class='discountText'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
             }
-
+                
+            $statement = $pdo->prepare("SELECT products.product_name FROM products INNER JOIN cart ON products.product_id=cart.product_id");
+            $statement->execute();
+            $names = $statement->fetchAll();
+            foreach($names as $name){
+                echo $name["product_name"]."<br>";
+            }
+            
             echo "<p>Totalt: ".$totalPrice." kr</p>";
         ?>
         </div>
@@ -55,12 +62,9 @@ include("../includes/database_connection.php");
         <div class="col-12 col-md-6">
             <p class="bigP">Beställning till</p>
             <p class="centerText">
-                <?=
-                $_POST["customerName"]."<br>".
-                $_POST["customerAddress"]."<br>".
-                $_POST["customerPhone"]."<br>".
-                $_POST["customerEmail"]."<br>"
-                ?>
+            <?=
+                $_SESSION["username"];
+            ?>
             </p>
         </div>
 
