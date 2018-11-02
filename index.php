@@ -42,7 +42,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <span class="dropdown-item-text">
                     <?php 
-
+                        
                     ?>
                 </span>
                 <a href="views/checkout.php" class="btn btn-info mx-auto checkoutBtn">Checkout</a>

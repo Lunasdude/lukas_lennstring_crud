@@ -15,13 +15,13 @@ include("../includes/database_connection.php");
         <div class="col-12 col-md-6 centerText">
             <p class="bigP">Varukorg</p>
 
-            <?php $totalPrice = 0;					
+            <?php 
             foreach($_POST as $key => $value){
                 if(strpos($key, 'Amount')){
                     $names[] .= str_replace("Amount", "", $key);
                 }
             }
-
+            
             //Loops through a list of the selected articles and writes out the order
             foreach($names as $name){
                 if(is_numeric($_POST[$name."Amount"]) && $_POST[$name."Amount"] >= 1){?>
@@ -30,11 +30,15 @@ include("../includes/database_connection.php");
                         <?=$name.", ".$_POST[$name."Amount"]." st - ".($_POST[$name."Amount"]*$_POST[$name."Price"])." kr<br>(".$_POST[$name."Price"]." st)"?> 
                     </p>
                 <?php
-                //Adds the price to the total
-                    $totalPrice += ($_POST[$name."Amount"]*$_POST[$name."Price"]);
                 }
             }
             
+
+// TO DO: * Only display cart for the logged user, not cart database
+//        
+//        * Stack orders of the same article into one pile
+
+
             // Writes if a discount applies on the current weekday
             if(date(D) === "Mon"){
                 echo "<p class='discountText'>Måndagsrabatt! (-50%)</p>";
@@ -45,12 +49,17 @@ include("../includes/database_connection.php");
             elseif(date(D) === "Fri"){
                 echo "<p class='discountText'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
             }
-                
-            $statement = $pdo->prepare("SELECT products.product_name, cart.amount, cart.new_price FROM products INNER JOIN cart ON products.product_id=cart.product_id");
+            
+            $totalPrice = 0;					
+            
+            $statement = $pdo->prepare("SELECT products.product_name, cart.amount, cart.new_price, cart.product_id FROM products INNER JOIN cart ON products.product_id=cart.product_id");
             $statement->execute();
             $articles = $statement->fetchAll();
+
             foreach($articles as $article){
-                echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br><br>";
+                echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br>"; ?>
+                <a style="color:red" href="../includes/delete.php?remove=<?=$article["product_id"]?>">Remove</a> <br><br>
+                <?php $totalPrice += ($article["new_price"] * $article["amount"]);
             }
             
             echo "<p>Totalt: ".$totalPrice." kr</p>";
@@ -67,6 +76,9 @@ include("../includes/database_connection.php");
             ?>
             </p>
         </div>
+
+
+<!-- TO DO: Confirm page -->
 
         <!-- Buttons -->
         <div class="centerText col-12">
