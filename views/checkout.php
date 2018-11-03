@@ -51,9 +51,13 @@ include("../includes/database_connection.php");
             include('../includes/get_user_cart.php');
 
             foreach($articles as $article){
+// TO DO: Don't make discounts count on days where articles are added but not confirmed until another day
+
                 echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br>"; ?>
                 <a style="color:red" href="../includes/delete.php?dropdown=false&remove=<?=$article["product_id"]?>">Remove</a> <br><br>
-                <?php $totalPrice += ($article["new_price"] * $article["amount"]);
+                
+                <?php 
+                $totalPrice += ($article["new_price"] * $article["amount"]);
             }
             
             echo "<p>Totalt: ".$totalPrice." kr</p>";
@@ -62,18 +66,19 @@ include("../includes/database_connection.php");
         <div class="col-12 d-block d-md-none"><hr></div>
         
         <!-- Customer info from the form -->
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 centerText">
             <p class="bigP">Beställning till</p>
             <p class="centerText">
             <?=
                 $_SESSION["username"];
             ?>
             </p>
+            <a href="confirm.php" class="btn btn-success">Confirm</a>
         </div>
 
         <!-- Buttons -->
         <div class="centerText col-12">
-            <a href="../index.php" class="btn btn-dark">Return</a>
+            <a href="../index.php" class="btn btn-dark">Return</a>  
         </div>
     </div>
 </div>

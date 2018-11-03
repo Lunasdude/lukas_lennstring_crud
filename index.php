@@ -1,11 +1,9 @@
 <?php
     session_start();
 
-/**
- * JOIN products
- * ON products.product_id
- * = cart.product_id
- */
+    if(isset($_GET["logout"]) && $_GET["logout"] == true){
+        header('Location: includes/logout.php');
+    }
 ?>
 
 

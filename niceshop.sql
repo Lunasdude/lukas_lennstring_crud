@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 01, 2018 at 06:41 PM
+-- Generation Time: Nov 03, 2018 at 04:27 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.2.1
 
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL
+  `amount` int(11) NOT NULL,
+  `new_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -102,7 +103,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `products`
 --
