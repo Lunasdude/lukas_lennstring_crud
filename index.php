@@ -41,7 +41,15 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <span class="dropdown-item-text">
                     <?php 
+                        $totalPrice = 0;
+                        include("includes/get_user_cart.php");
+                        foreach($articles as $article){
+                            echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br>"; ?>
+                            <a style="color:red" href="includes/delete.php?dropdown=true&remove=<?=$article["product_id"]?>">Remove</a> <br><br>
+                            <?php $totalPrice += ($article["new_price"] * $article["amount"]);
+                        }
                         
+                        echo "<p>Totalt: ".$totalPrice." kr</p>";
                     ?>
                 </span>
                 <a href="views/checkout.php" class="btn btn-info mx-auto checkoutBtn">Checkout</a>

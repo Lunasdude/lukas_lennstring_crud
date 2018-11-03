@@ -33,9 +33,6 @@ include("../includes/database_connection.php");
                 <?php
                 }
             }
-            
-
-// TO DO: * Stack orders of the same article into one pile
 
 
             // Writes if a discount applies on the current weekday
@@ -51,17 +48,11 @@ include("../includes/database_connection.php");
             
             $totalPrice = 0;					
             
-            $statement = $pdo->prepare("SELECT products.product_name, cart.amount, cart.new_price, cart.product_id FROM products INNER JOIN cart ON products.product_id=cart.product_id WHERE cart.customer_id = :userID");
-            $statement->execute(
-                [
-                    ':userID' => $_SESSION["id"]
-                ]
-            );
-            $articles = $statement->fetchAll();
+            include('../includes/get_user_cart.php');
 
             foreach($articles as $article){
                 echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br>"; ?>
-                <a style="color:red" href="../includes/delete.php?remove=<?=$article["product_id"]?>">Remove</a> <br><br>
+                <a style="color:red" href="../includes/delete.php?dropdown=false&remove=<?=$article["product_id"]?>">Remove</a> <br><br>
                 <?php $totalPrice += ($article["new_price"] * $article["amount"]);
             }
             
@@ -79,9 +70,6 @@ include("../includes/database_connection.php");
             ?>
             </p>
         </div>
-
-
-<!-- TO DO: Confirm page -->
 
         <!-- Buttons -->
         <div class="centerText col-12">

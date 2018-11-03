@@ -12,5 +12,8 @@ if(isset($_GET['remove'])){
         ]
     );
 }
-
-header('Location: ../views/checkout.php');
+if($_GET['dropdown'] == true){
+    header('Location: ../index.php');
+}else{
+    header('Location: ../views/checkout.php');
+}
