@@ -16,6 +16,7 @@ include("../includes/database_connection.php");
             <p class="bigP">Varukorg</p>
 
             <?php 
+            $names=[];
             foreach($_POST as $key => $value){
                 if(strpos($key, 'Amount')){
                     $names[] .= str_replace("Amount", "", $key);
@@ -34,26 +35,28 @@ include("../includes/database_connection.php");
             }
             
 
-// TO DO: * Only display cart for the logged user, not cart database
-//        
-//        * Stack orders of the same article into one pile
+// TO DO: * Stack orders of the same article into one pile
 
 
             // Writes if a discount applies on the current weekday
-            if(date(D) === "Mon"){
+            if(date('N') === 1){
                 echo "<p class='discountText'>Måndagsrabatt! (-50%)</p>";
             }
-            elseif(date(D) === "Wed"){
+            elseif(date('N') === 3){
                 echo "<p class='discountText'>Onsdagspriser (+10%)</p>";
             }
-            elseif(date(D) === "Fri"){
+            elseif(date('N') === 5){
                 echo "<p class='discountText'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
             }
             
             $totalPrice = 0;					
             
-            $statement = $pdo->prepare("SELECT products.product_name, cart.amount, cart.new_price, cart.product_id FROM products INNER JOIN cart ON products.product_id=cart.product_id");
-            $statement->execute();
+            $statement = $pdo->prepare("SELECT products.product_name, cart.amount, cart.new_price, cart.product_id FROM products INNER JOIN cart ON products.product_id=cart.product_id WHERE cart.customer_id = :userID");
+            $statement->execute(
+                [
+                    ':userID' => $_SESSION["id"]
+                ]
+            );
             $articles = $statement->fetchAll();
 
             foreach($articles as $article){

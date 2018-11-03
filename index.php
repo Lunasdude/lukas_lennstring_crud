@@ -26,7 +26,6 @@
 
 <?php
     //Data about the articles
-    include("includes/stock.php");
     include("includes/database_connection.php");
 ?>
 
@@ -69,8 +68,13 @@
                     <input type="text" name="username" id="login_username"> <br>
                     <label for="login_password">Password</label>
                     <input type="password" name="password" id="login_password"> <br>
-                    <h4 style="color:red;"><?=substr_replace($_GET["error"], ' ', 5, 1)?></h4>
-                    <input type="submit" class="btn btn-dark" value="Log in">
+                    <h4 style="color:red;">
+                    <?php 
+                        if(isset($_GET["error"])){ 
+                            echo substr_replace($_GET["error"], ' ', 5, 1); 
+                        }?>
+                    </h4>
+               <input type="submit" class="btn btn-dark" value="Log in">
                 </form>
             </div>
             <hr>
@@ -81,7 +85,13 @@
                     <input type="text" name="username" id="register_username"> <br>
                     <label for="register_password">Password</label>
                     <input type="password" name="password" id="register_password"> <br>
-                    <h4 style="color:red;"><?=substr_replace($_GET["registration_error"], ' ', 4, 1)?></h4>
+                    <h4 style="color:red;">
+                    <?php 
+                        if(isset($_GET["registration_error"])){ 
+                            echo substr_replace($_GET["registration_error"], ' ', 4, 1); 
+                        }
+                    ?>
+                    </h4>
                     <input type="submit" class="btn btn-dark" value="Register">
                 </form>
             </div>
@@ -90,13 +100,13 @@
     <div class="row box">
         <?php
         // Writes if a discount applies on the current weekday
-        if(date(D) === "Mon"){
+        if(date('N') === 1){
             echo "<p class='bigP col-12'>Måndagsrabatt! (-50%)</p>";
         }
-        elseif(date(D) === "Wed"){
+        elseif(date('N') === 3){
             echo "<p class='bigP col-12'>Onsdagspriser (+10%)</p>";
         }
-        elseif(date(D) === "Fri"){
+        elseif(date('N') === 5){
             echo "<p class='bigP col-12'>Fredagsrabatt! (-20kr på allt över 200kr)</p>";
         }
 
@@ -108,13 +118,13 @@
 
         foreach($fetched_stock as $product){ 
             //Applies discounts
-            if(date(D) === "Mon"){
+            if(date('N') === 1){
                 $newPrice = $product["price"] * 0.5;
             }
-            elseif(date(D) === "Wed"){
+            elseif(date('N') === 3){
                 $newPrice = $product["price"] * 1.1;
             }
-            elseif(date(D) === "Fri" && $product["price"] > 200){
+            elseif(date('N') === "5" && $product["price"] > 200){
                 $newPrice = $product["price"] - 20;
             }
             else{
