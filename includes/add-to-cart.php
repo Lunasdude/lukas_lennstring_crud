@@ -28,7 +28,7 @@ if(!isset($_SESSION["id"])){
         for($i = 0; $i < count($cartIDs); $i++){
             if($cartIDs[$i]["product_id"] == $_SESSION["product_id"]  &&  $cartIDs[$i]["customer_id"] == $_SESSION["id"]){
                 
-                $newAmount = $cartIDs[$i]["amount"] + $_SESSION["amount"];
+                $newAmount = $cartIDs[$i]["amount"] + $_SESSION["product_amount"];
 
                 $statement = $pdo->prepare(
                     "UPDATE cart
@@ -43,7 +43,7 @@ if(!isset($_SESSION["id"])){
                     ]
                 );
 
-                // header('Location: ../index.php');
+                header('Location: ../index.php');
                 return;
             }
 
