@@ -51,13 +51,25 @@ include("../includes/database_connection.php");
             include('../includes/get_user_cart.php');
 
             foreach($articles as $article){
-// TO DO: Don't make discounts count on days where articles are added but not confirmed until another day
 
-                echo $article["product_name"]." - ".$article["new_price"]." kr/st<br>".$article["amount"]." st<br>"; ?>
+                if(date('N') === 1){
+                    $newPrice = $article["price"] * 0.5;
+                }
+                elseif(date('N') === 3){
+                    $newPrice = $article["price"] * 1.1;
+                }
+                elseif(date('N') === "5" && $article["price"] > 200){
+                    $newPrice = $article["price"] - 20;
+                }
+                else{
+                    $newPrice = $article["price"];
+                }
+
+                echo $article["product_name"]." - ".$newPrice." kr/st<br>".$article["amount"]." st<br>"; ?>
                 <a style="color:red" href="../includes/delete.php?dropdown=false&remove=<?=$article["product_id"]?>">Remove</a> <br><br>
                 
                 <?php 
-                $totalPrice += ($article["new_price"] * $article["amount"]);
+                $totalPrice += ($newPrice * $article["amount"]);
             }
             
             echo "<p>Totalt: ".$totalPrice." kr</p>";

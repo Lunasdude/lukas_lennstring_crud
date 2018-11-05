@@ -50,15 +50,14 @@ if(!isset($_SESSION["id"])){
         }
 
         $statement = $pdo->prepare(
-            "INSERT INTO cart (product_id, customer_id, amount, new_price) 
-            VALUES (:product_id, :customer_id, :amount, :new_price)"
+            "INSERT INTO cart (product_id, customer_id, amount) 
+            VALUES (:product_id, :customer_id, :amount)"
         );
         $statement->execute(
             [
                 ':product_id' => $_SESSION["product_id"],
                 ':customer_id' => $_SESSION["id"],
-                ':amount' => $_SESSION["product_amount"],
-                ':new_price' => $_SESSION["product_newprice"]
+                ':amount' => $_SESSION["product_amount"]
             ]
         );
         header('Location: ../index.php');
